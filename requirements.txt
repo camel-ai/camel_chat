@@ -18,4 +18,6 @@ rich
 fastapi
 uvicorn
 markdown2
+markdownify
 nh3
+bs4

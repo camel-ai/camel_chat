@@ -1,12 +1,11 @@
 """
 Sample some conversations from a file.
 
-Usage: python3 -m fastchat.data.sample --in sharegpt.json --out sampled.json
+Usage: python3 -m camel_chat.data.sample --in sharegpt.json --out sampled.json
 """
 import argparse
 import json
-from typing import Dict, Sequence, Optional
-
+from typing import Dict, Optional, Sequence
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

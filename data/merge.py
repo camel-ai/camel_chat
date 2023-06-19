@@ -1,13 +1,12 @@
 """
 Merge two conversation files into one
 
-Usage: python3 -m fastchat.data.merge --in file1.json file2.json --out merged.json
+Usage: python3 -m camel_chat.data.merge --in file1.json file2.json --out merged.json
 """
 
 import argparse
 import json
-from typing import Dict, Sequence, Optional
-
+from typing import Dict, Optional, Sequence
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

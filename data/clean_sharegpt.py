@@ -3,19 +3,18 @@
 - Deduplication.
 
 Usage:
-python3 -m fastchat.data.clean_sharegpt --in sharegpt_html.json --out sharegpt_clean.json
+python3 -m camel_chat.data.clean_sharegpt --in sharegpt_html.json --out sharegpt_clean.json
 """
 import argparse
-from concurrent.futures import ProcessPoolExecutor
 import json
 import logging
 import re
+from concurrent.futures import ProcessPoolExecutor
 from typing import Dict, Union
 
 import bs4
 import markdownify  # == 0.11.6
 from tqdm import tqdm
-
 
 div_pattern = re.compile("<div.*?>")
 span_pattern = re.compile("<span.*?>")

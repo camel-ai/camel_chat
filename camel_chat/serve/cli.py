@@ -2,8 +2,8 @@
 Chat with a model with command line interface.
 
 Usage:
-python3 -m fastchat.serve.cli --model lmsys/fastchat-t5-3b-v1.0
-python3 -m fastchat.serve.cli --model ~/model_weights/vicuna-7b
+python3 -m camel_chat.serve.cli --model lmsys/fastchat-t5-3b-v1.0
+python3 -m camel_chat.serve.cli --model ~/model_weights/vicuna-7b
 """
 import argparse
 import os

@@ -1,4 +1,4 @@
-"""Inference for FastChat models."""
+"""Inference for CAMEL models."""
 import abc
 import gc
 from typing import Iterable, Optional
@@ -244,12 +244,6 @@ def chat_loop(
     model, tokenizer = load_model(
         model_path, device, num_gpus, max_gpu_memory, load_8bit, cpu_offloading, debug
     )
-    is_chatglm = "chatglm" in str(type(model)).lower()
-    is_fastchat_t5 = "t5" in str(type(model)).lower()
-
-    # Hardcode T5 repetition penalty to be 1.2
-    if is_fastchat_t5 and repetition_penalty == 1.0:
-        repetition_penalty = 1.2
 
     # Chat
     if conv_template:

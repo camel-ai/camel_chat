@@ -19,7 +19,7 @@ PORT=$(python -c 'import socket; s=socket.socket(); s.bind(("", 0)); print(s.get
 srun torchrun --nnodes=$NUM_NODES --nproc_per_node=$GPU_PER_NODE \
     --rdzv_backend=c10d \
     --rdzv_endpoint=$MASTER_ADDR:$PORT  \
-    fastchat/train/train_mem.py \
+    camel_chat/train/train_mem.py \
     --model_name_or_path ./camel30B-deepspeed-camel229K_sharegpt107K_alpaca52K_len2048/checkpoint-800  \
     --data_path ./datasets/camel229K_sharegpt107K_alpaca52K_len2048.json \
     --bf16 True \
