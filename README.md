@@ -60,7 +60,7 @@ python merge.py --in-file datasets/alpaca_data_conv.json datasets/camel_datasets
 ```
 ### Split long conversations to 2048 context length
 ```
-python split_long_conversation --in dataset/dataset.json --out dataset/dataset_2048.json --model-name /path/to/base/model/tokenizer
+python split_long_conversation.py --in dataset/dataset.json --out dataset/dataset_2048.json --model-name /path/to/base/model/tokenizer
 
 ```
 # Training
