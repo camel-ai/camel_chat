@@ -82,7 +82,7 @@ We use the same serving as lm-sys/FastChat. You can interact with the finetuned 
 We use the same prompt format as Vicuna_v1.1. It assumes a conversation between a user and an assistant. The user roles are separated from content by a colon. Assistant and user content are separated by space. Assistant role is terminated by <\/s>.
 
 ```
-USER: xxxxxxxxx ASSISTANT: xxxxxxxxx <\/s>
+USER: xxxxxxxxx ASSISTANT: xxxxxxxxx </s>
 ``` 
 
 For more details, check [here](https://github.com/camel-ai/camel_chat/blob/9c889e9b964eb36963dbe9cec8a034dafc844179/camel_chat/conversation.py#L231). You do not have to worry about this if you are using the serving included in this repository.
