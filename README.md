@@ -72,7 +72,7 @@ To launch a script on a computer cluster with Slurm support use `sbatch scripts/
 
 If you have trained a model with QLoRA, you will have to merge the adapter with base model. Run the following:
 ```
-python camel_chat/model/apply_lora.py --base-model-path /path/to/llama/base/model --target-model-path /path/to/save/folder --lora-path /path/to/adapter
+python camel_chat.model.apply_lora --base-model-path /path/to/llama/base/model --target-model-path /path/to/save/folder --lora-path /path/to/adapter
 ```
 # Serve
 We use the same serving as lm-sys/FastChat. You can interact with the finetuned models by terminal or Web GUI.
