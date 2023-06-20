@@ -35,7 +35,7 @@ pre-commit install
 # Data Pre-processing
 Download our data from Huggingface website. They are available under the account [camel-ai](https://huggingface.co/camel-ai). Our combined-data models also make use of ShareGPT data available [here](https://huggingface.co/datasets/anon8231489123/ShareGPT_Vicuna_unfiltered/tree/main/HTML_cleaned_raw_dataset) and Alpaca instruction dataset available [here](https://github.com/tatsu-lab/stanford_alpaca/blob/761dc5bfbdeeffa89b8bff5d038781a4055f796a/alpaca_data.json).
 
-## Download datasets collected with CAMEL framework and conver them to conversation format suitable for training
+### Download datasets collected with CAMEL framework and convert them to conversation format suitable for training
 ```
 cd data
 # Download CAMEL datasets into a folder called datasets
@@ -44,7 +44,7 @@ python download_hf_camel_datasets.py
 python convert_camel_datasets_to_conversation_format.py
 ```
 
-## ShareGPT Cleaning
+### ShareGPT Cleaning
 We follow lm-sys/FastChat in cleaning and pre-processing ShareGPT data by following the steps below:
 ```
 # Convert html to markdown
@@ -53,11 +53,11 @@ python3 clean_sharegpt --in sharegpt_html.json --out sharegpt_markdown.json
 # Keep English language conversations
 python3 optional_clean --in sharegpt_markdown.json --out sharegpt_markdown_en.json --keep-lang en
 ```
-## Conver Alpaca instruction dataset into conversation format
+### Convert Alpaca instruction dataset into conversation format
 ```
 python convert_alpaca_dataset_to_conversation.py
 ```
-## Merge datasets into one dataset.json file
+### Merge datasets into one dataset.json file
 ```
 python merge.py --in-file datasets/alpaca_data_conv.json datasets/camel_datasets_conv.json datasets/sharegpt_markdown_en.json --out-file datasets/dataset.json
 ```
