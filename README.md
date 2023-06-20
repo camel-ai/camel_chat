@@ -13,11 +13,8 @@ conda activate camel_chat
 # Install PyTorch with CUDA=11.7 support
 conda install pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvidia
 
-# Install dependencies
+# Install dependencies, flash-attn requires CUDA>11.0 and gcc compilers
 pip install -r requirements.txt
-
-# Install flash attention. Assumes CUDA and gcc available for compilation
-pip install 
 
 # Clone camel_chat repository
 https://github.com/camel-ai/camel_chat.git
@@ -60,6 +57,11 @@ python convert_alpaca_dataset_to_conversation.py
 ### Merge datasets into one dataset.json file
 ```
 python merge.py --in-file datasets/alpaca_data_conv.json datasets/camel_datasets_conv.json datasets/sharegpt_markdown_en.json --out-file datasets/dataset.json
+```
+### Split long conversations to 2048 context length
+```
+python split_long_conversation --in dataset/dataset.json --out dataset/dataset_2048.json --model-name /path/to/base/model/tokenizer
+
 ```
 # Training
 To train conversational model on CAMEL data or your custom data, we provided ready bash scripts for you to launch. We provide scripts for regular training which requires server grade GPUs. We also include a QLoRA alternative for finetuning the 7B and 13B models on consumer grade GPUs.
