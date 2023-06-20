@@ -1,11 +1,6 @@
-"""
-Merge two conversation files into one
-
-Usage: python3 -m camel_chat.data.merge --in file1.json file2.json --out merged.json
-"""
-
 import argparse
 import json
+import random
 from typing import Dict, Optional, Sequence
 
 if __name__ == "__main__":
@@ -17,6 +12,7 @@ if __name__ == "__main__":
     new_content = []
     for in_file in args.in_file:
         content = json.load(open(in_file, "r"))
+        print(f"{in_file} has {len(content)} conversations.")
         new_content.extend(content)
-
+    random.shuffle(new_content)
     json.dump(new_content, open(args.out_file, "w"), indent=2)

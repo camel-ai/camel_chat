@@ -1,10 +1,3 @@
-"""
-- Convert html to markdown with basic data cleaning.
-- Deduplication.
-
-Usage:
-python3 -m camel_chat.data.clean_sharegpt --in sharegpt_html.json --out sharegpt_clean.json
-"""
 import argparse
 import json
 import logging

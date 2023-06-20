@@ -412,3 +412,5 @@ Sessionx.vim
 tags
 # Persistent undo
 [._]*.un~
+# JSON dataset files
+*.json

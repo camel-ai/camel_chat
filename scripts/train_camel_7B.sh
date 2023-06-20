@@ -14,9 +14,9 @@ PORT=$(python -c 'import socket; s=socket.socket(); s.bind(("", 0)); print(s.get
 torchrun --nproc_per_node=$NUM_GPUS --master_port=$PORT \
     camel_chat/train/train_mem.py \
     --model_name_or_path <path_to_hf_llama_model>  \
-    --data_path <path_to_json_file> \
+    --data_path <path_to_dataset.json_file> \
     --bf16 True \
-    --output_dir output \
+    --output_dir ./output \
     --num_train_epochs 3 \
     --per_device_train_batch_size 2 \
     --per_device_eval_batch_size 16 \

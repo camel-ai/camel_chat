@@ -9,6 +9,7 @@ sentencepiece==0.1.99
 wandb==0.15.3
 flash-attn==1.0.5
 gradio==3.23.0
+huggingface_hub
 deepspeed
 polyglot 
 pyicu 
@@ -21,3 +22,4 @@ markdown2
 markdownify
 nh3
 bs4
+tqdm

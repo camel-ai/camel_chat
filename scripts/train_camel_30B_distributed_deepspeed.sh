@@ -20,10 +20,10 @@ srun torchrun --nnodes=$NUM_NODES --nproc_per_node=$GPU_PER_NODE \
     --rdzv_backend=c10d \
     --rdzv_endpoint=$MASTER_ADDR:$PORT  \
     camel_chat/train/train_mem.py \
-    --model_name_or_path ./camel30B-deepspeed-camel229K_sharegpt107K_alpaca52K_len2048/checkpoint-800  \
-    --data_path ./datasets/camel229K_sharegpt107K_alpaca52K_len2048.json \
+    --model_name_or_path <path_to_hf_llama_model>  \
+    --data_path <path_to_dataset.json_file> \
     --bf16 True \
-    --output_dir ./camel30B-deepspeed-camel229K_sharegpt107K_alpaca52K_len2048 \
+    --output_dir ./output \
     --num_train_epochs 3 \
     --per_device_train_batch_size 1 \
     --per_device_eval_batch_size 32 \
@@ -40,5 +40,4 @@ srun torchrun --nnodes=$NUM_NODES --nproc_per_node=$GPU_PER_NODE \
     --tf32 True \
     --model_max_length 2048 \
     --lazy_preprocess True \
-    --resume_from_checkpoint True \
     --deepspeed ./ds_config.json

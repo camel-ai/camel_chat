@@ -1,13 +1,3 @@
-"""
-Do optional cleaning (e.g., remove some languages).
-
-Usage:
-python3 -m camel_chat.data.optional_clean --in input.json --out output.json --keep-lang en
-python3 -m camel_chat.data.optional_clean --in input.json --out output.json --skip-lang en
-
-Requirement:
-pip3 install polyglot pyicu pycld2
-"""
 import argparse
 import json
 import re

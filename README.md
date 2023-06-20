@@ -35,14 +35,31 @@ pre-commit install
 # Data Pre-processing
 Download our data from Huggingface website. They are available under the account [camel-ai](https://huggingface.co/camel-ai). Our combined-data models also make use of ShareGPT data available [here](https://huggingface.co/datasets/anon8231489123/ShareGPT_Vicuna_unfiltered/tree/main/HTML_cleaned_raw_dataset) and Alpaca instruction dataset available [here](https://github.com/tatsu-lab/stanford_alpaca/blob/761dc5bfbdeeffa89b8bff5d038781a4055f796a/alpaca_data.json).
 
+## Download datasets collected with CAMEL framework and conver them to conversation format suitable for training
+```
+cd data
+# Download CAMEL datasets into a folder called datasets
+python download_hf_camel_datasets.py
+# Convert them to conversation format for training
+python convert_camel_datasets_to_conversation_format.py
+```
+
 ## ShareGPT Cleaning
 We follow lm-sys/FastChat in cleaning and pre-processing ShareGPT data by following the steps below:
 ```
 # Convert html to markdown
-python3 -m camel_chat.data.clean_sharegpt --in sharegpt_html.json --out sharegpt_clean.json
+python3 clean_sharegpt --in sharegpt_html.json --out sharegpt_markdown.json
 
-# Keep or remove specific languages
-python3 -m camel_chat.data.optional_clean --in sharegpt_clean.json --out sharegpt_clean_lang.json --skip-lang SOME_LANGUAGE_CODE
+# Keep English language conversations
+python3 optional_clean --in sharegpt_markdown.json --out sharegpt_markdown_en.json --keep-lang en
+```
+## Conver Alpaca instruction dataset into conversation format
+```
+python convert_alpaca_dataset_to_conversation.py
+```
+## Merge datasets into one dataset.json file
+```
+python merge.py --in-file datasets/alpaca_data_conv.json datasets/camel_datasets_conv.json datasets/sharegpt_markdown_en.json --out-file datasets/dataset.json
 ```
 # Training
 To train conversational model on CAMEL data or your custom data, we provided ready bash scripts for you to launch. We provide scripts for regular training which requires server grade GPUs. We also include a QLoRA alternative for finetuning the 7B and 13B models on consumer grade GPUs.
@@ -55,7 +72,7 @@ To launch a script on a computer cluster with Slurm support use `sbatch scripts/
 
 If you have trained a model with QLoRA, you will have to merge the adapter with base model. Run the following:
 ```
-python camel_chat/model/apply_lora.py --base-model-path /path/to/base/model --target-model-path /path/to/save/folder --lora-path /path/to/adapter
+python camel_chat/model/apply_lora.py --base-model-path /path/to/llama/base/model --target-model-path /path/to/save/folder --lora-path /path/to/adapter
 ```
 # Serve
 We use the same serving as lm-sys/FastChat. You can interact with the finetuned models by terminal or Web GUI.
