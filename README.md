@@ -115,4 +115,4 @@ python -m camel_chat.serve.gradio_web_server
 This is the user interface that users will interact with.
 
 # Acknowledgements
-We heavily borrow from the open source project lm-sys/FastChat and artidoro/qlora. We thank them for sharing their work and contributing to the open source community.
+We heavily borrow from the open source projects lm-sys/FastChat and artidoro/qlora. We thank them for sharing their work and contributing to the open source community.
