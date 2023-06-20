@@ -80,7 +80,7 @@ if __name__ == "__main__":
         else:
             dataset_directory = os.path.join(download_directory, directory)
             file_list = glob.glob(os.path.join(dataset_directory,"*.json"))
-            conv = conv + [convert_science_to_conversation(file_list)]
+            conv = conv + convert_science_to_conversation(file_list)
 
     random.shuffle(conv)
     print('Saving camel datasets...')

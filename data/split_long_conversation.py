@@ -1,15 +1,7 @@
-"""
-Split long conversations based on certain max length.
-
-Usage: python3 -m fastchat.data.split_long_conversation \
-    --in sharegpt_clean.json \
-    --out sharegpt_split.json \
-    --model-name-or-path $<model-name>
-"""
 import argparse
-from concurrent.futures import ProcessPoolExecutor
 import json
-from typing import Dict, Sequence, Optional
+from concurrent.futures import ProcessPoolExecutor
+from typing import Dict, Optional, Sequence
 
 import transformers
 from tqdm import tqdm

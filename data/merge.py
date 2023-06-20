@@ -15,4 +15,5 @@ if __name__ == "__main__":
         print(f"{in_file} has {len(content)} conversations.")
         new_content.extend(content)
     random.shuffle(new_content)
+    print(f"Saving to {args.out_file}")
     json.dump(new_content, open(args.out_file, "w"), indent=2)
