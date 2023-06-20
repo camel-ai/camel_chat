@@ -78,6 +78,8 @@ python camel_chat.model.apply_lora --base-model-path /path/to/llama/base/model -
 # Serve
 We use the same serving as lm-sys/FastChat. You can interact with the finetuned models by terminal or Web GUI.
 
+## Prompt format
+We use the same prompt format as Vicuna_v1.1. It assumes a conversation between a user and an assistant. The user roles are separated from content by a colon, and the role is terminated by <\s>. For more details, check [here](https://github.com/camel-ai/camel_chat/blob/9c889e9b964eb36963dbe9cec8a034dafc844179/camel_chat/conversation.py#L231). You do not have to worry about this if you are using the serving included in this repository.
 ## Serve in Terminal
 
 To interact with the finetuned model in terminal, use the following command:
