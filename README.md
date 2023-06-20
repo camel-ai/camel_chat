@@ -61,7 +61,6 @@ python merge.py --in-file datasets/alpaca_data_conv.json datasets/camel_datasets
 ### Split long conversations to 2048 context length
 ```
 python split_long_conversation.py --in dataset/dataset.json --out dataset/dataset_2048.json --model-name /path/to/base/model/tokenizer
-
 ```
 # Training
 To train conversational model on CAMEL data or your custom data, we provided ready bash scripts for you to launch. We provide scripts for regular training which requires server grade GPUs. We also include a QLoRA alternative for finetuning the 7B and 13B models on consumer grade GPUs.
