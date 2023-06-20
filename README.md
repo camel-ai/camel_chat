@@ -48,10 +48,10 @@ python convert_camel_datasets_to_conversation_format.py
 We follow lm-sys/FastChat in cleaning and pre-processing ShareGPT data by following the steps below:
 ```
 # Convert html to markdown
-python3 clean_sharegpt --in sharegpt_html.json --out sharegpt_markdown.json
+python clean_sharegpt --in sharegpt_html.json --out sharegpt_markdown.json
 
 # Keep English language conversations
-python3 optional_clean --in sharegpt_markdown.json --out sharegpt_markdown_en.json --keep-lang en
+python optional_clean --in sharegpt_markdown.json --out sharegpt_markdown_en.json --keep-lang en
 ```
 ### Convert Alpaca instruction dataset into conversation format
 ```
@@ -81,36 +81,36 @@ We use the same serving as lm-sys/FastChat. You can interact with the finetuned 
 
 To interact with the finetuned model in terminal, use the following command:
 ```
-python3 -m camel_chat.serve.cli --model-path /path/to/model
+python -m camel_chat.serve.cli --model-path /path/to/model
 ``` 
 If one GPU is not enough to fit the model, you can load it on 2 GPUs
 ```
-python3 -m camel_chat.serve.cli --model-path /path/to/model --num-gpus 2
+python -m camel_chat.serve.cli --model-path /path/to/model --num-gpus 2
 ```
 If you do not have enough VRAM and you can load the model in 8-bit
 ```
-python3 -m camel_chat.serve.cli --model-path /path/to/model --load-8bit
+python -m camel_chat.serve.cli --model-path /path/to/model --load-8bit
 ```
 ## Serve in Web GUI
 Launch the controller
 ```
-python3 -m camel_chat.serve.controller
+python -m camel_chat.serve.controller
 ```
 Launch the model worker(s)
 ```
-python3 -m camel_chat.serve.model_worker --model-path lmsys/vicuna-7b-v1.3
+python -m camel_chat.serve.model_worker --model-path lmsys/vicuna-7b-v1.3
 ```
 Wait until the process finishes loading the model and you see "Uvicorn running on ...". The model worker will register itself to the controller.
 
 To ensure that your model worker is connected to your controller properly, send a test message using the following command:
 ```
-python3 -m camel_chat.serve.test_message --model-name vicuna-7b-v1.3
+python -m camel_chat.serve.test_message --model-name vicuna-7b-v1.3
 ```
 You will see a short output.
 
 Launch the Gradio web server
 ```
-python3 -m camel_chat.serve.gradio_web_server
+python -m camel_chat.serve.gradio_web_server
 ```
 This is the user interface that users will interact with.
 
