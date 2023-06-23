@@ -83,6 +83,19 @@ def filter_invalid_roles(content):
 
     return new_content
 
+def split_long_conversations(content, tokenizer_path, max_length=2048, begin=None, end=None):
+
+    tokenizer = transformers.AutoTokenizer.from_pretrained(
+        tokenizer_path,
+        model_max_length=max_length,
+        padding_side="right",
+        use_fast=False,
+    )
+    new_content = split_all(content, begin, end, tokenizer, max_length)
+    new_content = filter_invalid_roles(new_content)
+
+    print(f"total: {len(content)}, new: {len(new_content)}")
+    return new_content
 
 def main(args):
     content = json.load(open(args.in_file, "r"))

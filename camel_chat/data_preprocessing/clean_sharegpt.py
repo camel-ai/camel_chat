@@ -97,7 +97,7 @@ def clean_html_one_sample(sample):
     return (sample, 0)
 
 
-def clean_html_all(content, begin, end):
+def clean_html_all(content, begin=None, end=None):
     """
     Clean the source html files.
     """

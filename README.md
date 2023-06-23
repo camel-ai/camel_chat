@@ -30,29 +30,37 @@ pip install pre-commit
 pre-commit install
 ```
 # Data Pre-processing
-Download our data from Huggingface website. They are available under the account [camel-ai](https://huggingface.co/camel-ai). Our combined-data models also make use of ShareGPT data available [here](https://huggingface.co/datasets/anon8231489123/ShareGPT_Vicuna_unfiltered/tree/main/HTML_cleaned_raw_dataset) and Alpaca instruction dataset available [here](https://github.com/tatsu-lab/stanford_alpaca/blob/761dc5bfbdeeffa89b8bff5d038781a4055f796a/alpaca_data.json).
+Download our data from Huggingface website. They are available under the account [camel-ai](https://huggingface.co/camel-ai). Our combined-data models also make use of ShareGPT data available [here](https://huggingface.co/datasets/anon8231489123/ShareGPT_Vicuna_unfiltered/tree/main/HTML_cleaned_raw_dataset) and Alpaca instruction dataset available [here](https://github.com/tatsu-lab/stanford_alpaca/blob/761dc5bfbdeeffa89b8bff5d038781a4055f796a/alpaca_data.json). Alpaca instruction dataset has to be downloaded manually.
+You can select which datasets you want to download and preprocess. The option are as follows: [ai_society, code, math, physics, chemistry, biology, alpaca, sharegpt, all]. You can pass several datasets as command line arguments as follows:
 
-### Download datasets collected with CAMEL framework and convert them to conversation format suitable for training
+To download all datasets, please run the follwoing command:
 ```
-cd data
-# Download CAMEL datasets into a folder called datasets
-python download_hf_camel_datasets.py
-# Convert them to conversation format for training
-python convert_camel_datasets_to_conversation_format.py
+python -m camel_chat.data_preprocessing.download_datasets --download_directory datasets --datasets all
+```
+To preprocess the data into conversation format, please run the following:
+```
+python -m camel_chat.data_preprocessing.convert_datasets_to_conversation_format --download_directory datasets --datasets all
+```
+You can also select subset of datasets and pass them as arguments as follows
+```
+# Downloads ai_society and biology only
+python -m camel_chat.data_preprocessing.download_datasets --download_directory datasets --datasets ai_society biology
+# Processes ai_society and biology only
+python -m camel_chat.data_preprocessing.convert_datasets_to_conversation_format --download_directory datasets --datasets ai_society biology
 ```
 
 ### ShareGPT Cleaning
 We follow lm-sys/FastChat in cleaning and pre-processing ShareGPT data by following the steps below:
 ```
 # Convert html to markdown
-python clean_sharegpt --in sharegpt_html.json --out sharegpt_markdown.json
+python -m camel_chat.data_preprocessing.clean_sharegpt --in sharegpt_html.json --out sharegpt_markdown.json
 
 # Keep English language conversations
 python optional_clean --in sharegpt_markdown.json --out sharegpt_markdown_en.json --keep-lang en
 ```
 ### Convert Alpaca instruction dataset into conversation format
 ```
-python convert_alpaca_dataset_to_conversation.py
+python -m data_preprocessing.convert_alpaca_dataset_to_conversation
 ```
 ### Merge datasets into one dataset.json file
 ```
