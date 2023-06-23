@@ -5,6 +5,7 @@ import os
 import shutil
 import uuid
 
+import pandas as pd
 from tqdm.auto import tqdm
 
 from .clean_sharegpt import clean_html_all
@@ -16,7 +17,7 @@ DATASETS = {"ai_society": "ai_society_chat",
             "physics": "physics", 
             "chemistry": "chemistry", 
             "biology": "biology",
-            "alpaca": "alpaca_data.json",
+            "alpaca": "train-00000-of-00001-a09b74b3ef9c3b56.parquet",
             "sharegpt": ["sg_90k_part1.json", "sg_90k_part2.json"]}
 
 def filter_keywords(contents, message_keys):
@@ -33,18 +34,20 @@ def filter_keywords(contents, message_keys):
     return contents
 
 def convert_alpaca_to_conv_dataset(dataset, dataset_directory):
-    with open(os.path.join(dataset_directory, DATASETS["alpaca"])) as f:
-        alpaca_dataset = json.load(f)
 
+    alpaca_dataset = pd.read_parquet(os.path.join(dataset_directory, "data", DATASETS[dataset]), engine='pyarrow')
     alpaca_conv_dataset = []
 
-    for item in tqdm(alpaca_dataset):
+    for instruction, input, output in tqdm(zip(alpaca_dataset["instruction"], alpaca_dataset["input"], alpaca_dataset["output"])):
         alpaca_conv_dataset.append({"id":str(uuid.uuid4()),
-        "conversations":[{"from": "human", "value": item["instruction"] + " " + item["input"]}, 
-                         {"from": "gpt", "value": item["output"]}]})
+        "conversations":[{"from": "human", "value": instruction + " " + input}, 
+                         {"from": "gpt", "value": output}]})
 
     with open(os.path.join(dataset_directory, f"{dataset}_conv.json"), "w") as f:
         json.dump(alpaca_conv_dataset, f, indent=2)
+
+    if os.path.exists(os.path.join(dataset_directory, "data")):
+        shutil.rmtree(os.path.join(dataset_directory, "data"))
 
 
 def convert_to_chat_format(contents, message_keys):
