@@ -17,7 +17,7 @@ conda install pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvi
 pip install -r requirements.txt
 
 # Clone camel_chat repository
-https://github.com/camel-ai/camel_chat.git
+git clone https://github.com/camel-ai/camel_chat.git
 
 # Change directory to camel_chat
 cd camel_chat
