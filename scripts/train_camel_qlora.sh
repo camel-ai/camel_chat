@@ -58,6 +58,3 @@ torchrun --nproc_per_node=$NUM_GPUS --master_port=$PORT \
     # --resume_from_checkpoint True \
     # --checkpoint_path ./camel65B-qlora-camel229K_sharegpt107K_alpaca52K_len2048/checkpoint-550 \
     # --load_weights False
-    # --max_samples 10000 \
-
-echo "[TRAIN] Done"

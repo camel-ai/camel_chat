@@ -414,3 +414,5 @@ tags
 [._]*.un~
 # JSON dataset files
 *.json
+# Models
+*.bin

@@ -53,17 +53,17 @@ def unzip_datasets(download_directory):
 
 def download_dataset(dataset, download_directory):
 
-    # try:
-    download_hf_dataset(dataset, download_directory)
-    # except:
-    #     print(f"{dataset} could not be downloaded")
+    try:
+        download_hf_dataset(dataset, download_directory)
+    except:
+        print(f"{dataset} could not be downloaded")
 
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--download_directory", type=str, default="datasets")
     parser.add_argument("--datasets", nargs='+', choices=list(DATASETS.keys())+["all"], type=str)
-    
+    parser.add_argument("--download_directory", type=str, default="datasets")
+
     args = parser.parse_args()
 
     if not os.path.exists(args.download_directory):

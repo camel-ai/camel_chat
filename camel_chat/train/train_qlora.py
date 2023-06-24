@@ -7,8 +7,8 @@ from typing import Dict, Optional
 import numpy as np
 import torch
 import transformers
+from qlora_trainer import QLoRA_Trainer
 from torch.utils.data import Dataset
-from transformers import Trainer
 from transformers.trainer_pt_utils import LabelSmoother
 
 from camel_chat.conversation import SeparatorStyle
@@ -441,7 +441,7 @@ def train():
     tokenizer.pad_token = tokenizer.unk_token
 
     data_module = make_supervised_data_module(tokenizer=tokenizer, data_args=data_args)
-    trainer = Trainer(
+    trainer = QLoRA_Trainer(
         model=model, tokenizer=tokenizer, args=training_args, **data_module
     )
 
