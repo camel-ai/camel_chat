@@ -1,5 +1,5 @@
 # Overview
-This is a minimalistic repository to reproduce and serve CAMEL models based on lm-sys/FastChat [repository](https://github.com/lm-sys/FastChat). CAMEL models are conversational language models obtained by finetuning LLaMA foundation language models on data collected through the CAMEL framework. CAMEL is an opensource project doing research on collaborative AI agents and LLMs. Find out more about the CAMEL project by visiting our [website](https://www.camel-ai.org/).
+This is a minimalistic repository to reproduce and serve CAMEL models based on [lm-sys/FastChat](https://github.com/lm-sys/FastChat) repository. CAMEL models are conversational language models obtained by finetuning LLaMA foundation language models on data collected through the CAMEL framework. To generate your own data with CAMEL framework, check [camel-ai/camel](https://github.com/camel-ai/camel) repository. To see what's possible with the CAMEL framework, you can play around with the [agents app](https://www.camel-ai.org/agent) that allows you to choose user and assistant roles, and specify the task you want them to solve based on their expertise. This is currently powered by ChatGPT, but we are working on making it powered by our CAMEL models. CAMEL is an opensource project doing research on collaborative AI LLM agents. Find out more about the CAMEL project by visiting our [website](https://www.camel-ai.org/).
 
 # Installation
 Setup camel_chat conda environment:
@@ -30,7 +30,7 @@ pip install pre-commit
 pre-commit install
 ```
 # Data Pre-processing
-Collected data through CAMEL framework are hosted on Huggingface website. They are available under the account [camel-ai](https://huggingface.co/camel-ai). Our combined-data models also make use of ShareGPT data available [here](https://huggingface.co/datasets/anon8231489123/ShareGPT_Vicuna_unfiltered/tree/main/HTML_cleaned_raw_dataset) and Alpaca instruction dataset available [here](https://github.com/tatsu-lab/stanford_alpaca/blob/761dc5bfbdeeffa89b8bff5d038781a4055f796a/alpaca_data.json). We follow lm-sys/FastChat in cleaning and pre-processing ShareGPT data by converting HTML to markdown. We choose to keep only English language for ShareGPT dataset.
+Collected data through CAMEL framework are hosted on Huggingface website. They are available under the account [camel-ai](https://huggingface.co/camel-ai). Explore our collected data through our [data explorer](https://www.camel-ai.org/data_explorer) app. Our combined-data models also make use of ShareGPT data available [here](https://huggingface.co/datasets/anon8231489123/ShareGPT_Vicuna_unfiltered/tree/main/HTML_cleaned_raw_dataset) and Alpaca instruction dataset available [here](https://github.com/tatsu-lab/stanford_alpaca/blob/761dc5bfbdeeffa89b8bff5d038781a4055f796a/alpaca_data.json). We follow lm-sys/FastChat in cleaning and pre-processing ShareGPT data by converting HTML to markdown. We choose to keep only English language for ShareGPT dataset.
 
 You can select which datasets you want to download and preprocess. The option are as follows: [ai_society, code, math, physics, chemistry, biology, alpaca, sharegpt, all]. You can pass several datasets as command line arguments as follows:
 
@@ -49,7 +49,7 @@ python -m camel_chat.data_preprocessing.download_datasets --download_directory d
 # Processes ai_society and biology only
 python -m camel_chat.data_preprocessing.convert_datasets_to_conversation_format --download_directory datasets --datasets ai_society biology
 ```
-### Merge datasets and split long conversations to 2048 tokens and save them into one dataset.json file 
+Merge datasets and split long conversations to 2048 tokens and save them into one dataset.json file 
 ```
 python merge.py --in-directory datasets --out-file dataset.json --tokenizer-path /path/to/tokenizer --max-length 2048
 ```
@@ -105,6 +105,7 @@ If you do not have a GPU, you can use CPU only inference. This requires 60GB of 
 python3 -m camel_chat.serve.cli --model-path /path/to/model --device cpu
 ```
 ### Serve in Web GUI
+
 Launch the controller
 ```
 python -m camel_chat.serve.controller
@@ -128,11 +129,12 @@ python -m camel_chat.serve.gradio_web_server
 This is the user interface that users will interact with.
 
 ### Integration with GPT4ALL and llama.cpp projects
+
 We provide a quantized ggml 13B model that can run on laptops. The easiest way to do so is to install the GPT4ALL application. They provide installers for different operating systems on the project's [webiste](https://gpt4all.io/index.html). Choose the applicable installer and install the app on your laptop. When opening the app for the first time, you'll be prompted to point to a directory where your models will be stored. Download the CAMEL-13B ggml model from [here](https://huggingface.co/camel-ai/CAMEL-13B-GGML-Role-Playing-Data) and place it in the directory chosen earlier. This requires about 8GB of CPU RAM.
 
 Alternatively, a more technical and involved approach uses llama.cpp project which requires you to compile a C++ code to executables.
 
-# Evaluation on Open LLM Leaderboard using lm-evaluation-harness
+# Evaluation on Hugginface Open LLM Leaderboard using lm-evaluation-harness
 We provide scripts to evaluate finetuned models on the benchmarks adopted by [Open LLM Leaderboard](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard) using the [lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness). To run the evaluation, clone the lm-evaluation-harness repository and place `camel_chat/evaluation/eval_tasks.sh`, `camel_chat/evaluation/run.sh`, and `camel_chat/evaluation/results_parser.py` in lm-evaluation-harness directory. Follow the instructions provided to install the conda environment needed to use the lm-evaluation-harness. The scripts assumes you are running evaluation on a computer cluster with Slurm support. To run the evaluation, run `bash eval_tasks.sh`. If you are running evaluation on a machine with no Slurm support, replace `sbatch` with `bash` in `eval_tasks.sh` and run `bash eval_tasks.sh`. Note that the numbers on the old Open LLM leaderboard are reproducible at commit hash `441e6ac`. Later commits boost LLaMA based models by 4-5 points on average. This is mainly due to to a tokenization issue addressed in [this](https://github.com/EleutherAI/lm-evaluation-harness/pull/531) pull request. Further improvement on MMLU benchmark was observed in [this](https://github.com/EleutherAI/lm-evaluation-harness/pull/497) pull request.
 
 # Acknowledgements
