@@ -130,7 +130,10 @@ This is the user interface that users will interact with.
 
 ### Integration with GPT4ALL and llama.cpp projects
 
-We provide a quantized ggml 13B model that can run on laptops. The easiest way to do so is to install the GPT4ALL application. They provide installers for different operating systems on the project's [webiste](https://gpt4all.io/index.html). Choose the applicable installer and install the app on your laptop. When opening the app for the first time, you'll be prompted to point to a directory where your models will be stored. Download the CAMEL-13B ggml model from [here](https://huggingface.co/camel-ai/CAMEL-13B-GGML-Role-Playing-Data) and place it in the directory chosen earlier. This requires about 8GB of CPU RAM.
+We provide a quantized ggml 13B model that can run on laptops. The easiest way to do so is to install the GPT4ALL application. They provide installers for different operating systems on the project's [webiste](https://gpt4all.io/index.html). Choose the applicable installer and install the app on your laptop. When opening the app for the first time, you'll be prompted to point to a directory where your models will be stored. Download the CAMEL-13B ggml model from [here](https://huggingface.co/camel-ai/CAMEL-13B-GGML-Role-Playing-Data) and place it in the directory chosen earlier. Running the 13B requires about 8GB of CPU RAM. For the best performance, click on the gear in the upper right corner of the app and change the prompt to the following:
+```
+A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions. USER: %1 ASSISTANT: 
+```
 
 Alternatively, a more technical and involved approach uses llama.cpp project which requires you to compile a C++ code to executables.
 
@@ -139,3 +142,34 @@ We provide scripts to evaluate finetuned models on the benchmarks adopted by [Op
 
 # Acknowledgements
 We heavily borrow from the open source projects [lm-sys/FastChat](https://github.com/lm-sys/FastChat) and [artidoro/qlora](https://github.com/artidoro/qlora/tree/main). We thank them for sharing their work and contributing to the open source community.
+
+# Citation
+If you used this code base in your project please cite the following:
+```bibtex
+@misc{zheng2023judging,
+      title={Judging LLM-as-a-judge with MT-Bench and Chatbot Arena},
+      author={Lianmin Zheng and Wei-Lin Chiang and Ying Sheng and Siyuan Zhuang and Zhanghao Wu and Yonghao Zhuang and Zi Lin and Zhuohan Li and Dacheng Li and Eric. P Xing and Hao Zhang and Joseph E. Gonzalez and Ion Stoica},
+      year={2023},
+      eprint={2306.05685},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
+}
+
+@article{dettmers2023qlora,
+  title={QLoRA: Efficient Finetuning of Quantized LLMs},
+  author={Dettmers, Tim and Pagnoni, Artidoro and Holtzman, Ari and Zettlemoyer, Luke},
+  journal={arXiv preprint arXiv:2305.14314},
+  year={2023}
+}
+```
+If you used the CAMEL framework to collect your data or used the CAMEL datasets, please cite the following:
+```bibtex
+@misc{li2023camel,
+    title={CAMEL: Communicative Agents for "Mind" Exploration of Large Scale Language Model Society},
+    author={Guohao Li and Hasan Abed Al Kader Hammoud and Hani Itani and Dmitrii Khizbullin and Bernard Ghanem},
+    year={2023},
+    eprint={2303.17760},
+    archivePrefix={arXiv},
+    primaryClass={cs.AI}
+}
+```

@@ -40,4 +40,4 @@ srun torchrun --nnodes=$NUM_NODES --nproc_per_node=$GPU_PER_NODE \
     --tf32 True \
     --model_max_length 2048 \
     --lazy_preprocess True \
-    --deepspeed ./ds_config.json
+    --deepspeed ./scripts/ds_config.json
